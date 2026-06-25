@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#FF6B35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="菜谱指南">
+  <meta name="description" content="大学生菜谱指南 - 像素风智能菜谱工具，从「有什么食材」到「做完记录营养」全流程陪伴">
+  <title>🍳 大学生菜谱指南</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+
+  <!-- Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Zpix Chinese Pixel Font -->
+  <style>
+    @font-face {
+      font-family: 'Zpix';
+      src: url('https://cdn.jsdelivr.net/npm/zpix@3.1.0/dist/Zpix.woff2') format('woff2');
+      font-display: swap;
+    }
+  </style>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/pixel.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Chart.js (lazy loaded when nutrition tab visited) -->
+</head>
+<body>
+
+  <div id="app">
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Main scrollable content -->
+    <main id="main-content" class="main-content">
+      <!-- Loading screen -->
+      <div id="loading-screen" class="view flex items-center justify-center" style="min-height: 80vh;">
+        <div style="text-align: center;">
+          <div class="pixel-animate-bounce" style="font-size: 48px;">🍳</div>
+          <p class="font-pixel text-muted mt-4" style="font-size: var(--font-size-xs);">加载中...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="navbar" class="navbar">
+      <div class="navbar__tab navbar__tab--active" data-tab="home" data-path="/">
+        <span class="navbar__tab-icon">🏠</span>
+        <span class="navbar__tab-label">首页</span>
+      </div>
+      <div class="navbar__tab" data-tab="browse" data-path="/browse">
+        <span class="navbar__tab-icon">📖</span>
+        <span class="navbar__tab-label">菜谱</span>
+      </div>
+      <div class="navbar__tab" data-tab="match" data-path="/match">
+        <span class="navbar__tab-icon">🔍</span>
+        <span class="navbar__tab-label">做点啥</span>
+      </div>
+      <div class="navbar__tab" data-tab="nutrition" data-path="/nutrition">
+        <span class="navbar__tab-icon">📊</span>
+        <span class="navbar__tab-label">饮食</span>
+      </div>
+      <div class="navbar__tab" data-tab="me" data-path="/settings">
+        <span class="navbar__tab-icon">👤</span>
+        <span class="navbar__tab-label">我的</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Core Scripts (order matters) -->
+  <script src="js/config.js"></script>
+  <script src="js/utils/storage.js"></script>
+  <script src="js/utils/dom.js"></script>
+  <script src="js/utils/format.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/router.js"></script>
+
+  <!-- Data Layer -->
+  <script src="js/data/nutrition-base.js"></script>
+  <script src="js/data/ingredient-synonyms.js"></script>
+  <script src="js/data/recipes-zhongcan.js"></script>
+  <script src="js/data/recipes-xican.js"></script>
+
+  <!-- Matching Engine -->
+  <script src="js/matching/classic-pairings.js"></script>
+  <script src="js/matching/scorer.js"></script>
+  <script src="js/matching/matcher.js"></script>
+
+  <!-- View Modules -->
+  <script src="js/modules/home.js"></script>
+  <script src="js/modules/smart-match.js"></script>
+  <script src="js/modules/browse.js"></script>
+  <script src="js/modules/recipe-detail.js"></script>
+  <script src="js/modules/cooking-mode.js"></script>
+  <script src="js/modules/nutrition.js"></script>
+  <script src="js/modules/diary.js"></script>
+  <script src="js/modules/favorites.js"></script>
+  <script src="js/modules/shopping-list.js"></script>
+  <script src="js/modules/settings.js"></script>
+
+  <!-- App Bootstrap -->
+  <script src="js/app.js"></script>
+</body>
+</html>

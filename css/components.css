@@ -1,0 +1,656 @@
+/* ╔══════════════════════════════════════╗
+   ║  Application Components             ║
+   ╚══════════════════════════════════════╝ */
+
+/* ── Recipe Card ── */
+.recipe-card {
+  background: var(--color-bg-card);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  box-shadow: var(--shadow-pixel-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+  position: relative;
+}
+
+.recipe-card:active {
+  transform: scale(0.97);
+}
+
+.recipe-card__image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--color-bg-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  image-rendering: pixelated;
+  border-bottom: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+.recipe-card__body {
+  padding: var(--space-3);
+}
+
+.recipe-card__title {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.recipe-card__time {
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  color: var(--color-text-muted);
+}
+
+.recipe-card__fav {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: rgba(255,255,255,0.9);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.recipe-card__fav--active {
+  color: var(--color-danger);
+}
+
+/* ── Recipe Detail ── */
+.recipe-hero {
+  background: var(--color-bg-warm);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+
+.recipe-hero__icon {
+  font-size: 72px;
+  image-rendering: pixelated;
+  margin-bottom: var(--space-4);
+}
+
+.recipe-hero__name {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.recipe-meta-bar {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.recipe-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  color: var(--color-text-muted);
+}
+
+.recipe-meta-item__value {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+}
+
+/* ── Ingredient List ── */
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+.ingredient-item__check {
+  width: 20px;
+  height: 20px;
+  border: var(--pixel-1) solid var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.ingredient-item__check--done {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.ingredient-item__name {
+  flex: 1;
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+}
+
+.ingredient-item__amount {
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.ingredient-item__optional {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  background: var(--color-bg-warm);
+  padding: 1px var(--space-2);
+}
+
+/* ── Cooking Steps ── */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step-item {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-bottom: 1px dashed var(--color-border-pixel);
+}
+
+.step-item:last-child {
+  border-bottom: none;
+}
+
+.step-item__number {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  background: var(--color-primary);
+  color: white;
+  border: var(--pixel-1) solid var(--color-primary-dark);
+}
+
+.step-item__content {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+
+.step-item__timer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  margin-top: var(--space-2);
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  background: var(--color-bg-warm);
+  border: var(--pixel-1) solid var(--color-secondary);
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* ── Nutrition Facts Panel ── */
+.nutrition-facts {
+  background: var(--color-surface);
+  border: var(--pixel-2) solid var(--color-text-primary);
+  padding: var(--space-4);
+  max-width: 280px;
+}
+
+.nutrition-facts__title {
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-lg);
+  text-align: center;
+  padding-bottom: var(--space-2);
+  border-bottom: var(--pixel-2) solid var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.nutrition-facts__row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-1) 0;
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  border-bottom: 1px solid var(--color-border-pixel);
+}
+
+.nutrition-facts__row--bold {
+  font-size: var(--font-size-sm);
+  border-top: var(--pixel-2) solid var(--color-text-primary);
+  border-bottom: none;
+  padding-top: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* ── Nutrition Dashboard ── */
+.nutrition-rings {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.nutrition-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nutrition-ring__circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: var(--pixel-2) solid var(--color-border-pixel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: var(--font-pixel-en);
+  font-size: 10px;
+  background: var(--color-surface);
+}
+
+.nutrition-ring__label {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Meal Log ── */
+.meal-log-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  margin-bottom: var(--space-2);
+}
+
+.meal-log-item__icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.meal-log-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.meal-log-item__name {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+}
+
+.meal-log-item__detail {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.meal-log-item__cals {
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+}
+
+.meal-log-item__delete {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+/* ── Diary / Report ── */
+.report-section {
+  margin-bottom: var(--space-6);
+}
+
+.report-section__title {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-base);
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+.report-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-sm);
+}
+
+.report-rank-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.report-rank-num {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  flex-shrink: 0;
+}
+
+.report-rank-num--gold   { background: #FFD700; color: #5D4037; border: 1px solid #DAA520; }
+.report-rank-num--silver { background: #C0C0C0; color: #5D4037; border: 1px solid #A0A0A0; }
+.report-rank-num--bronze { background: #CD7F32; color: white; border: 1px solid #A0622E; }
+
+.report-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-1) 0;
+}
+
+.report-bar__label {
+  width: 40px;
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.report-bar__track {
+  flex: 1;
+  height: 14px;
+  background: var(--color-bg-warm);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+.report-bar__fill {
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.report-bar__count {
+  width: 30px;
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Heatmap ── */
+.heatmap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.heatmap__cell {
+  width: 14px;
+  height: 14px;
+  background: var(--color-bg-warm);
+  border: 1px solid var(--color-border-pixel);
+}
+
+.heatmap__cell--l1 { background: #FFD4B8; }
+.heatmap__cell--l2 { background: #FFB088; }
+.heatmap__cell--l3 { background: #FF8A65; }
+.heatmap__cell--l4 { background: #FF6B35; }
+
+/* ── Achievement Badge ── */
+.achievement-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  width: 80px;
+  text-align: center;
+}
+
+.achievement-badge__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border: var(--pixel-2) solid var(--color-primary);
+  background: var(--color-bg-warm);
+}
+
+.achievement-badge__icon--locked {
+  border-color: var(--color-text-muted);
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.achievement-badge__name {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--color-text-primary);
+}
+
+/* ── Shopping List ── */
+.shop-category {
+  margin-bottom: var(--space-4);
+}
+
+.shop-category__title {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-warm);
+  display: inline-block;
+  border: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  margin-bottom: var(--space-1);
+  transition: opacity var(--transition-fast);
+}
+
+.shop-item--done {
+  opacity: 0.4;
+}
+
+.shop-item--done .shop-item__name {
+  text-decoration: line-through;
+}
+
+.shop-item__check {
+  width: 20px;
+  height: 20px;
+  border: var(--pixel-1) solid var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.shop-item__check--done {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.shop-item__name {
+  flex: 1;
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+}
+
+.shop-item__amount {
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Settings ── */
+.settings-group {
+  margin-bottom: var(--space-6);
+}
+
+.settings-group__title {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px dashed var(--color-border-pixel);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+}
+
+.settings-row__label {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+}
+
+.settings-row__value {
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.settings-row__input {
+  width: 80px;
+  text-align: center;
+  padding: var(--space-2);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+}
+
+/* ── Quick Ingredient Chips ── */
+.quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Match Result ── */
+.match-result-card {
+  background: var(--color-bg-card);
+  border: var(--pixel-2) solid var(--color-border-pixel);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+  position: relative;
+}
+
+.match-result-card:active {
+  transform: scale(0.98);
+}
+
+.match-result-card--best {
+  border-color: var(--color-primary);
+  border-width: var(--pixel-2);
+  box-shadow: var(--shadow-pixel-md);
+}
+
+.match-result-card__badge {
+  position: absolute;
+  top: -1px;
+  right: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  color: white;
+  background: var(--color-primary);
+}
+
+.match-result-card__missing {
+  margin-top: var(--space-2);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+/* ── Timer Overlay ── */
+.timer-overlay {
+  position: fixed;
+  bottom: calc(var(--navbar-height) + var(--safe-area-bottom) + var(--space-4));
+  right: var(--space-4);
+  z-index: 50;
+}
+
+.timer-display {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-pixel-en);
+  border: var(--pixel-3) solid var(--color-primary);
+  box-shadow: var(--shadow-pixel-lg);
+  cursor: pointer;
+}
+
+.timer-display__time {
+  font-size: var(--font-size-base);
+}
+
+.timer-display__label {
+  font-size: 6px;
+  color: var(--color-text-muted);
+}
+
+.timer-display--running {
+  animation: pixel-pulse 1s steps(4) infinite;
+}
