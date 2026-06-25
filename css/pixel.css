@@ -1,0 +1,321 @@
+/* ╔══════════════════════════════════════╗
+   ║  Pixel Art UI Components            ║
+   ║  Borders, Buttons, Cards, Effects   ║
+   ╚══════════════════════════════════════╝ */
+
+/* ── Pixel Border Base ── */
+.pixel-border {
+  border: var(--pixel-1) solid var(--color-text-primary);
+  box-shadow:
+    var(--pixel-2) var(--pixel-2) 0 0 var(--pixel-shadow-dark);
+  image-rendering: pixelated;
+}
+
+.pixel-border-primary {
+  border: var(--pixel-1) solid var(--color-primary);
+  box-shadow:
+    var(--pixel-2) var(--pixel-2) 0 0 rgba(216,67,21,0.25);
+}
+
+.pixel-border-light {
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  box-shadow:
+    var(--pixel-1) var(--pixel-1) 0 0 rgba(93,64,55,0.08);
+}
+
+/* ── Pixel Button ── */
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  color: white;
+  background: var(--color-primary);
+  border: var(--pixel-1) solid var(--color-primary-dark);
+  box-shadow:
+    var(--pixel-2) var(--pixel-2) 0 0 rgba(216,67,21,0.3);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+  position: relative;
+  top: 0;
+  left: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.pixel-btn:disabled {
+  opacity: 0.5;
+  transform: none;
+  box-shadow: var(--pixel-2) var(--pixel-2) 0 0 rgba(216,67,21,0.3);
+  cursor: not-allowed;
+}
+
+.pixel-btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: var(--pixel-2) var(--pixel-2) 0 0 var(--pixel-shadow-light);
+}
+
+.pixel-btn--small {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-xs);
+  box-shadow: var(--pixel-1) var(--pixel-1) 0 0 rgba(216,67,21,0.3);
+}
+
+.pixel-btn--large {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--font-size-md);
+  box-shadow: var(--pixel-3) var(--pixel-3) 0 0 rgba(216,67,21,0.3);
+}
+
+.pixel-btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* ── Pixel Card ── */
+.pixel-card {
+  background: var(--color-bg-card);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  box-shadow: var(--shadow-pixel-md);
+  padding: var(--space-4);
+  position: relative;
+}
+
+.pixel-card--clickable {
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.pixel-card--clickable:active {
+  transform: scale(0.98);
+}
+
+/* ── Pixel Input ── */
+.pixel-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  background: var(--color-surface);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  color: var(--color-text-primary);
+  box-shadow: inset var(--pixel-1) var(--pixel-1) 0 0 rgba(0,0,0,0.05);
+}
+
+.pixel-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: inset var(--pixel-1) var(--pixel-1) 0 0 rgba(255,107,53,0.1),
+              0 0 0 var(--pixel-1) rgba(255,107,53,0.2);
+}
+
+.pixel-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ── Pixel Tag / Chip ── */
+.pixel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+.pixel-chip:active {
+  transform: translate(1px, 1px);
+}
+
+.pixel-chip--active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary-dark);
+}
+
+.pixel-chip--warm {
+  background: var(--color-bg-warm);
+  border-color: var(--color-secondary);
+}
+
+/* ── Pixel Divider ── */
+.pixel-divider {
+  height: var(--pixel-1);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-border-pixel) 0px,
+    var(--color-border-pixel) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border: none;
+  margin: var(--space-4) 0;
+}
+
+/* ── Pixel Progress Bar ── */
+.pixel-progress {
+  height: 12px;
+  background: var(--color-bg-warm);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  overflow: hidden;
+}
+
+.pixel-progress__fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-primary) 0px,
+    var(--color-primary) 6px,
+    var(--color-primary-light) 6px,
+    var(--color-primary-light) 8px
+  );
+  transition: width 300ms steps(10);
+}
+
+.pixel-progress__fill--success { background: repeating-linear-gradient(90deg, var(--color-success) 0px, var(--color-success) 6px, #81C784 6px, #81C784 8px); }
+.pixel-progress__fill--danger  { background: repeating-linear-gradient(90deg, var(--color-danger) 0px, var(--color-danger) 6px, #EF6C6C 6px, #EF6C6C 8px); }
+
+/* ── Pixel Badge ── */
+.pixel-badge {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  font-family: var(--font-pixel-en);
+  font-size: 8px;
+  line-height: 1.6;
+  color: white;
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary-dark);
+}
+
+.pixel-badge--easy   { background: var(--color-success); border-color: #43A047; }
+.pixel-badge--medium { background: var(--color-warning); border-color: #F57C00; }
+.pixel-badge--hard   { background: var(--color-danger); border-color: #C62828; }
+
+/* ── Pixel Icon Frame ── */
+.pixel-icon-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-bg-warm);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  font-size: 24px;
+  image-rendering: pixelated;
+}
+
+.pixel-icon-frame--large {
+  width: 72px;
+  height: 72px;
+  font-size: 40px;
+}
+
+/* ── Pixel Star Rating ── */
+.pixel-stars {
+  display: inline-flex;
+  gap: 2px;
+  font-family: var(--font-pixel-en);
+  font-size: var(--font-size-xs);
+  color: var(--color-star);
+  letter-spacing: 0;
+}
+
+/* ── Pixel Tab Bar ── */
+.pixel-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  background: var(--color-bg-card);
+  border: var(--pixel-1) solid var(--color-border-pixel);
+  border-bottom: var(--pixel-2) solid var(--color-border-pixel);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.pixel-tab--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+/* ── Pixel Toggle ── */
+.pixel-toggle {
+  width: 44px;
+  height: 24px;
+  background: var(--color-border-pixel);
+  border: var(--pixel-1) solid var(--color-text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-fast);
+}
+
+.pixel-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 1px solid var(--color-text-muted);
+}
+
+.pixel-toggle--on {
+  background: var(--color-primary);
+}
+
+.pixel-toggle--on::after {
+  left: auto;
+  right: 2px;
+}
+
+/* ── Animations ── */
+@keyframes pixel-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pixel-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pixel-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes pixel-spin {
+  from { transform: rotate(0deg) scale(1, 1); }
+  to { transform: rotate(360deg) scale(1, 1); }
+}
+
+.pixel-animate-in {
+  animation: pixel-fade-in 300ms steps(6) forwards;
+}
+
+.pixel-animate-bounce {
+  animation: pixel-bounce 600ms steps(4) infinite;
+}
