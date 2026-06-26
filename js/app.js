@@ -179,10 +179,11 @@ const App = {
 
     // Find the best matching tab
     let activeTab = 'home';
+    let bestLen = 0;
     for (const [pattern, tab] of Object.entries(tabMap)) {
-      if (route.startsWith(pattern)) {
+      if (route.startsWith(pattern) && pattern.length > bestLen) {
         activeTab = tab;
-        break;
+        bestLen = pattern.length;
       }
     }
 
