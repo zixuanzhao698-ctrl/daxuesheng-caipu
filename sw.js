@@ -3,7 +3,7 @@
 // ║  Cache-first strategy              ║
 // ╚══════════════════════════════════════╝
 
-const CACHE_NAME = 'caipu-guide-v1.0.0';
+const CACHE_NAME = 'caipu-guide-v2.1.0';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

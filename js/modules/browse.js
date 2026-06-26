@@ -195,8 +195,14 @@ const BrowseView = {
       onClick: () => Router.go('/recipe/' + recipe.id),
     });
 
+    // Cuisine-based hue for card image background
+    const hueMap = { '川菜':5,'粤菜':40,'鲁菜':25,'苏菜':45,'浙菜':160,'闽菜':35,'湘菜':10,'徽菜':30,'东北菜':30,'西北':40,'家常':28,'意式':120,'法式':200,'日式':175,'韩式':15,'印度':20,'东南亚':70,'墨西哥':15,'美式':210 };
+    card.style.setProperty('--card-hue', hueMap[recipe.cuisine] || 28);
+
     // Image area with emoji
-    card.appendChild(DOM.create('div', { className: 'recipe-card__image', text: recipe.emoji }));
+    const imgDiv = DOM.create('div', { className: 'recipe-card__image' });
+    imgDiv.appendChild(DOM.create('span', { className: 'card-emoji', text: recipe.emoji }));
+    card.appendChild(imgDiv);
 
     // Favorite button
     const isFav = Store.isFavorite(recipe.id);

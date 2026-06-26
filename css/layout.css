@@ -72,14 +72,16 @@
   color: var(--color-primary);
 }
 
-.navbar__tab--active::before {
-  content: '';
+/* ── Sliding indicator bar ── */
+.navbar__indicator {
   position: absolute;
   top: 0;
-  left: 25%;
-  right: 25%;
   height: var(--pixel-2);
   background: var(--color-primary);
+  transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .navbar__tab-icon {

@@ -103,17 +103,21 @@ const HomeView = {
   },
 
   _createRecipeCard(recipe) {
-    return DOM.create('div', { className: 'recipe-card', style: 'margin-bottom: var(--space-3);' },
-      DOM.create('div', { className: 'recipe-card__image', text: recipe.emoji }),
-      DOM.create('div', { className: 'recipe-card__body' },
-        DOM.create('div', { className: 'recipe-card__title', text: recipe.name }),
-        DOM.create('div', { className: 'recipe-card__meta' },
-          DOM.create('span', { className: 'pixel-badge pixel-badge--' + (recipe.difficulty === 1 ? 'easy' : recipe.difficulty === 2 ? 'medium' : 'hard'), text: Format.difficultyText(recipe.difficulty) }),
-          DOM.create('span', { className: 'recipe-card__time', text: recipe.prepTime + recipe.cookTime + '分钟' }),
-          DOM.create('span', { className: 'pixel-stars', text: '★'.repeat(Math.round(recipe.tasteRating)) })
-        )
+    const hueMap = { '川菜':5,'粤菜':40,'鲁菜':25,'苏菜':45,'浙菜':160,'闽菜':35,'湘菜':10,'徽菜':30,'东北菜':30,'西北':40,'家常':28,'意式':120,'法式':200,'日式':175,'韩式':15,'印度':20,'东南亚':70,'墨西哥':15,'美式':210 };
+    const card = DOM.create('div', { className: 'recipe-card', style: 'margin-bottom: var(--space-3);' });
+    card.style.setProperty('--card-hue', hueMap[recipe.cuisine] || 28);
+    const imgDiv = DOM.create('div', { className: 'recipe-card__image' });
+    imgDiv.appendChild(DOM.create('span', { className: 'card-emoji', text: recipe.emoji }));
+    card.appendChild(imgDiv);
+    card.appendChild(DOM.create('div', { className: 'recipe-card__body' },
+      DOM.create('div', { className: 'recipe-card__title', text: recipe.name }),
+      DOM.create('div', { className: 'recipe-card__meta' },
+        DOM.create('span', { className: 'pixel-badge pixel-badge--' + (recipe.difficulty === 1 ? 'easy' : recipe.difficulty === 2 ? 'medium' : 'hard'), text: Format.difficultyText(recipe.difficulty) }),
+        DOM.create('span', { className: 'recipe-card__time', text: recipe.prepTime + recipe.cookTime + '分钟' }),
+        DOM.create('span', { className: 'pixel-stars', text: '★'.repeat(Math.round(recipe.tasteRating)) })
       )
-    );
+    ));
+    return card;
   },
 
   _statChip(label, value) {

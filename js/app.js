@@ -5,6 +5,7 @@
 const App = {
   _mainContent: null,
   _navbar: null,
+  _indicator: null,
   _currentView: null,
   _viewCache: {},
 
@@ -18,12 +19,16 @@ const App = {
     // Get DOM refs
     this._mainContent = DOM.$('#main-content');
     this._navbar = DOM.$('#navbar');
+    this._indicator = DOM.$('.navbar__indicator', this._navbar);
 
     // Setup routes
     this._setupRoutes();
 
     // Setup navbar listeners
     this._setupNavbar();
+
+    // Update indicator on window resize
+    window.addEventListener('resize', () => this._updateIndicator());
 
     // Register service worker (for PWA)
     if ('serviceWorker' in navigator) {
@@ -177,7 +182,7 @@ const App = {
       '/settings': 'me',
     };
 
-    // Find the best matching tab
+    // Find the best matching tab (longest prefix wins)
     let activeTab = 'home';
     let bestLen = 0;
     for (const [pattern, tab] of Object.entries(tabMap)) {
@@ -191,6 +196,20 @@ const App = {
       const isActive = tab.dataset.tab === activeTab;
       DOM.toggleClass(tab, 'navbar__tab--active', isActive);
     });
+    this._updateIndicator();
+  },
+
+  /**
+   * Slide the indicator bar to the active tab
+   */
+  _updateIndicator() {
+    if (!this._indicator || !this._navbar) return;
+    const activeTab = DOM.$('.navbar__tab--active', this._navbar);
+    if (!activeTab) return;
+    const navRect = this._navbar.getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+    this._indicator.style.left = (tabRect.left - navRect.left) + 'px';
+    this._indicator.style.width = tabRect.width + 'px';
   },
 
   /**

@@ -20,13 +20,65 @@
 .recipe-card__image {
   width: 100%;
   aspect-ratio: 4/3;
-  background: var(--color-bg-warm);
+  /* Cuisine-tinted gradient fallback, overridden by --card-hue */
+  --_h: var(--card-hue, 30);
+  background:
+    radial-gradient(circle at 20% 30%, hsl(var(--_h), 60%, 92%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, hsl(var(--_h), 50%, 85%) 0%, transparent 50%),
+    linear-gradient(160deg, hsl(var(--_h), 40%, 95%) 0%, hsl(var(--_h), 50%, 88%) 50%, hsl(var(--_h), 45%, 82%) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
-  image-rendering: pixelated;
+  font-size: 52px;
+  position: relative;
+  overflow: hidden;
   border-bottom: var(--pixel-1) solid var(--color-border-pixel);
+}
+
+/* Pixel dot pattern overlay */
+.recipe-card__image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(93, 64, 55, 0.04) 3px,
+      rgba(93, 64, 55, 0.04) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(93, 64, 55, 0.04) 3px,
+      rgba(93, 64, 55, 0.04) 4px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Emoji with depth */
+.recipe-card__image .card-emoji {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(2px 3px 2px rgba(93, 64, 55, 0.3));
+  transition: transform var(--transition-base);
+}
+
+.recipe-card:hover .recipe-card__image .card-emoji,
+.recipe-card:active .recipe-card__image .card-emoji {
+  transform: scale(1.12);
+}
+
+/* Pixel-art corner accents */
+.recipe-card__image::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(93, 64, 55, 0.06);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .recipe-card__body {
